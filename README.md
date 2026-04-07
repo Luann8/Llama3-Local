@@ -1,13 +1,5 @@
-Tens toda a razão. Sem o teste, ficamos no escuro se a "ponte" entre o Python e o Ollama realmente está funcionando.
 
-Aqui está o HTML do README atualizado, incluindo uma seção específica para o Teste de Conexão, para garantir que o Llama 3 está ouvindo as chamadas da API antes de você tentar mexer no SQL.
-
-HTML
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>README - Llama 3 + SQL</title>
+ <title>README - Llama 3 + SQL</title>
 </head>
 <body>
 
