@@ -12,7 +12,7 @@
 <h2>2. Teste de Instalação (Crucial)</h2>
     <p>Antes de integrar ao banco, verifique se o Python consegue "conversar" com o Ollama. Crie o arquivo <code>teste_ia.py</code>:</p>
     
-    <pre>
+ <pre>
 from langchain_ollama import OllamaLLM
 
 # Inicializa o modelo
