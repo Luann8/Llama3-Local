@@ -1,14 +1,6 @@
 <title>Guia: Llama 3 + SQL Integration</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f4f7f6; }
-        header { border-bottom: 3px solid #4CAF50; padding-bottom: 20px; margin-bottom: 30px; }
-        h1 { color: #2c3e50; }
-        h2 { color: #16a085; margin-top: 30px; }
-        code { background: #272822; color: #f8f8f2; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; }
-        pre { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 8px; overflow-x: auto; border-left: 5px solid #4CAF50; }
-        .step { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .warning { background: #fff3cd; border-left: 5px solid #ffecb5; padding: 10px; margin: 20px 0; }
-    </style>
+
+
 </head>
 <body>
 
