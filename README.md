@@ -1,67 +1,151 @@
-<h1>Guia de Integração: Llama 3 & SQL</h1>
-    <p>Este guia ensina como conectar o modelo Llama 3 (rodando localmente) a um banco de dados SQLite para consultas em linguagem natural.</p>
+<h1>🧠 Llama 3 + SQLite Integration Guide</h1>
 
- <hr>
-    <h2>1. Configuração do Ollama</h2>
-    <p>Certifique-se de que o serviço está ativo no seu terminal Pop!_OS:</p>
-    <ul>
-        <li><strong>Passo A:</strong> Execute <code>ollama serve</code> em um terminal.</li>
-        <li><strong>Passo B:</strong> Em outro terminal, baixe o modelo: <code>ollama run llama3</code>.</li>
-    </ul>
+<p>This guide shows how to connect a locally running <strong>Llama 3 model (via Ollama)</strong> to a SQLite database, enabling natural language queries (NL → SQL).</p>
 
-<h2>2. Teste de Instalação (Crucial)</h2>
-    <p>Antes de integrar ao banco, verifique se o Python consegue "conversar" com o Ollama. Crie o arquivo <code>teste_ia.py</code>:</p>
-    
- <pre>
-from langchain_ollama import OllamaLLM
+<hr>
 
-# Inicializa o modelo
+<h2>⚙️ 1. Install and Configure Ollama</h2>
+
+<h3>📥 Install (Linux - Pop!_OS / Ubuntu)</h3>
+<pre><code>curl -fsSL https://ollama.com/install.sh | sh</code></pre>
+
+<p>Verify installation:</p>
+<pre><code>ollama --version</code></pre>
+
+<h3>▶️ Start the service</h3>
+<pre><code>ollama serve</code></pre>
+
+<div class="note">
+⚠️ This command must remain running in the background.
+</div>
+
+<h3>📦 Download the Llama 3 model</h3>
+<pre><code>ollama pull llama3</code></pre>
+
+<p>Or run directly:</p>
+<pre><code>ollama run llama3</code></pre>
+
+<hr>
+
+<h2>🧪 2. Installation Test (CRITICAL STEP)</h2>
+
+<p>Create a test file to ensure Python can communicate with Ollama.</p>
+
+<h3>📄 teste_ia.py</h3>
+
+<pre><code>from langchain_ollama import OllamaLLM
+
 llm = OllamaLLM(model="llama3")
 
-# Tenta uma pergunta simples
 try:
-    resposta = llm.invoke("Olá, você está pronto para trabalhar com SQL?")
-    print("TESTE DE CONEXÃO: SUCESSO!")
-    print("Resposta da IA:", resposta)
+    resposta = llm.invoke("Hello, are you ready to work with SQL?")
+    print("✅ CONNECTION TEST: SUCCESS!")
+    print("AI Response:", resposta)
 except Exception as e:
-    print("ERRO DE CONEXÃO: Verifique se o 'ollama serve' está rodando.")
+    print("❌ CONNECTION ERROR")
+    print("Make sure 'ollama serve' is running.")
     print(e)
-    </pre>
+</code></pre>
 
-<h2>3. Preparando o Banco de Dados (SQLite)</h2>
-    <p>Crie o arquivo <code>setup_db.py</code> para gerar dados de teste:</p>
-    <pre>
-import sqlite3
+<p>Run:</p>
+<pre><code>python teste_ia.py</code></pre>
+
+<hr>
+
+<h2>🗄️ 3. Create SQLite Database</h2>
+
+<h3>📄 setup_db.py</h3>
+
+<pre><code>import sqlite3
+
 conn = sqlite3.connect('dados.db')
 cursor = conn.cursor()
-cursor.execute('CREATE TABLE IF NOT EXISTS vendas (id INTEGER, produto TEXT, preco REAL)')
-cursor.execute('INSERT INTO vendas (produto, preco) VALUES ("Teclado", 250.0), ("Mouse", 100.0)')
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS vendas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    produto TEXT,
+    preco REAL
+)
+''')
+
+cursor.execute('''
+INSERT INTO vendas (produto, preco)
+VALUES 
+("Keyboard", 250.0),
+("Mouse", 100.0)
+''')
+
 conn.commit()
 conn.close()
-print("Banco de dados 'dados.db' criado!")
-    </pre>
 
- <h2>4. Integração Final</h2>
-    <p>Instale as bibliotecas:</p>
-    <code>pip install langchain-ollama sqlalchemy langchain-experimental</code>
+print("Database 'dados.db' created successfully!")
+</code></pre>
 
-  <p>Use o script <code>main.py</code> para a consulta final:</p>
-    <pre>
-from langchain_ollama import OllamaLLM
+<p>Run:</p>
+<pre><code>python setup_db.py</code></pre>
+
+<hr>
+
+<h2>📦 4. Install Python Dependencies</h2>
+
+<pre><code>pip install langchain langchain-ollama sqlalchemy langchain-experimental</code></pre>
+
+<hr>
+
+<h2>🔗 5. Final Integration</h2>
+
+<h3>📄 main.py</h3>
+
+<pre><code>from langchain_ollama import OllamaLLM
 from langchain_community.utilities import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
 
-# Conecta ao banco local
 db = SQLDatabase.from_uri("sqlite:///dados.db")
 llm = OllamaLLM(model="llama3")
 
-# Cria a corrente de consulta
 db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
 
-# Pergunta em português
-db_chain.run("Qual o produto mais caro na tabela de vendas?")
-    </pre>
+response = db_chain.run("What is the most expensive product in the sales table?")
 
-  <hr>
-    <p><em>Nota: Se o teste de instalação falhar, verifique se a porta 11434 não está bloqueada por um firewall.</em></p>
+print("Answer:", response)
+</code></pre>
 
+<p>Run:</p>
+<pre><code>python main.py</code></pre>
+
+<hr>
+
+<h2>🧠 Example Questions</h2>
+
+<ul>
+    <li>What is the most expensive product?</li>
+    <li>List all products</li>
+    <li>What is the average price?</li>
+    <li>How many products are there?</li>
+</ul>
+
+<hr>
+
+<h2>⚠️ Common Issues</h2>
+
+<h3>❌ Cannot connect to Ollama</h3>
+<pre><code>ollama serve</code></pre>
+
+<p>Check default endpoint:</p>
+<pre><code>http://localhost:11434</code></pre>
+
+<h3>🔥 Firewall issues</h3>
+<pre><code>sudo ufw allow 11434</code></pre>
+
+<hr>
+
+<h2>✅ Conclusion</h2>
+
+<p>You now have a system capable of:</p>
+
+<ul>
+    <li>Running AI locally (no external APIs)</li>
+    <li>Querying databases using natural language</li>
+    <li>Automatically generating SQL queries</li>
+</ul>
