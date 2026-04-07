@@ -1,15 +1,4 @@
-Ah, entendi! Você quer o conteúdo do README estruturado em HTML puro, mas sem aquele CSS todo e sem firulas, apenas as tags de estrutura para que fique funcional e direto ao ponto.
 
-Aqui está o código focado em hierarquia (H1, H2) e listas, que é o padrão mais "limpo" para documentação:
-
-HTML
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>README - Llama 3 + SQL</title>
-</head>
-<body>
 
     <h1>Guia de Integração: Llama 3 & SQL</h1>
     <p>Este guia ensina como conectar o modelo Llama 3 (rodando localmente) a um banco de dados SQLite para consultas em linguagem natural.</p>
