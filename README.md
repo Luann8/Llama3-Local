@@ -1,9 +1,4 @@
-
- <title>README - Llama 3 + SQL</title>
-</head>
-<body>
-
-  <h1>Guia de Integração: Llama 3 & SQL</h1>
+<h1>Guia de Integração: Llama 3 & SQL</h1>
     <p>Este guia ensina como conectar o modelo Llama 3 (rodando localmente) a um banco de dados SQLite para consultas em linguagem natural.</p>
 
  <hr>
