@@ -39,6 +39,8 @@ ollama run llama3</pre>
     </ul>
 </section>
 
+<br>
+
 <div class="warning">
     <strong>Dica de Segurança:</strong> Ao integrar APIs de IA com bancos de dados, use sempre usuários com permissão de "Apenas Leitura" (Read-Only) para evitar deleções acidentais via prompt.
 </div>
