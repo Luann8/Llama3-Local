@@ -1,8 +1,3 @@
-<h1>Guia: Llama 3 + SQL Integration</h1>
-
-
-</head>
-<body>
 
 <header>
     <h1>Guia de Integração: Llama 3 & SQL</h1>
