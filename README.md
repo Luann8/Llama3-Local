@@ -47,53 +47,21 @@ except Exception as e:
     print(e)
 </code></pre>
 
-<p>Run:</p>
-<pre><code>python teste_ia.py</code></pre>
-
 <hr>
 
-<h2>🗄️ 3. Create SQLite Database</h2>
-
-<h3>📄 setup_db.py</h3>
-
-<pre><code>import sqlite3
-
-conn = sqlite3.connect('dados.db')
-cursor = conn.cursor()
-
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS vendas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    produto TEXT,
-    preco REAL
-)
-''')
-
-cursor.execute('''
-INSERT INTO vendas (produto, preco)
-VALUES 
-("Keyboard", 250.0),
-("Mouse", 100.0)
-''')
-
-conn.commit()
-conn.close()
-
-print("Database 'dados.db' created successfully!")
-</code></pre>
 
 <p>Run:</p>
 <pre><code>python setup_db.py</code></pre>
 
 <hr>
 
-<h2>📦 4. Install Python Dependencies</h2>
+<h2>📦 3. Install Python Dependencies</h2>
 
 <pre><code>pip install langchain langchain-ollama sqlalchemy langchain-experimental</code></pre>
 
 <hr>
 
-<h2>🔗 5. Final Integration</h2>
+<h2>🔗 4. Final Integration</h2>
 
 <h3>📄 main.py</h3>
 
